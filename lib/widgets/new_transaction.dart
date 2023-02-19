@@ -105,7 +105,7 @@ class _NewTransactionState extends State<NewTransaction> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Theme.of(context).primaryColor,
                     foregroundColor:
-                        Theme.of(context).textTheme.labelSmall!.color,
+                      Theme.of(context).textTheme.labelSmall!.color,
                   ),
                   onPressed: _submitData,
                 ),
