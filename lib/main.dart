@@ -126,7 +126,7 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   const Text('Show Chart'),
-                Switch.adaptive(
+                Switch(
                   value: _showChart,
                   onChanged: (value) {
                     setState(() {
