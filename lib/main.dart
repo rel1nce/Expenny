@@ -6,12 +6,12 @@ import './widgets/new_transaction.dart';
 import 'widgets/chart.dart';
 
 void main() {
-  // widgetsflutterbinding.ensureinitialized();
-  // systemchrome.setpreferredorientations([deviceorientation.portraitup]);
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -36,12 +36,14 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: MyHomePage(),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
@@ -49,16 +51,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransactions = [];
   bool _showChart = false;
-
-  List<Transaction> get _recentTransactions {
-    return _userTransactions.where((transaction) {
-      return transaction.date.isAfter(
-        DateTime.now().subtract(
-          const Duration(days: 7),
-        ),
-      );
-    }).toList();
-  }
 
   void _addNewTransaction(
       String txTitle, double txAmount, DateTime chosedDate) {
@@ -80,8 +72,8 @@ class _MyHomePageState extends State<MyHomePage> {
       builder: (_) {
         return GestureDetector(
           onTap: () {},
-          child: NewTransaction(_addNewTransaction),
           behavior: HitTestBehavior.opaque,
+          child: NewTransaction(_addNewTransaction),
         );
       },
     );
@@ -98,10 +90,10 @@ class _MyHomePageState extends State<MyHomePage> {
     final mediaQuery = MediaQuery.of(context);
     final isLandscape = mediaQuery.orientation == Orientation.landscape;
     final appBar = AppBar(
-      title: Text('Expenny'),
+      title: const Text('Expenny'),
       actions: <Widget>[
         IconButton(
-          icon: Icon(Icons.add),
+          icon: const Icon(Icons.add),
           onPressed: () => _startAddNewTransaction(context),
         ),
       ],
@@ -112,8 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
               appBar.preferredSize.height -
               mediaQuery.padding.top) *
           0.7,
-      child:
-          TransactionList(_userTransactions, _deleteTransaction),
+      child: TransactionList(_userTransactions, _deleteTransaction),
     );
 
     return Scaffold(
@@ -122,37 +113,40 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            if (isLandscape) Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            if (isLandscape)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   const Text('Show Chart'),
-                Switch(
-                  value: _showChart,
-                  onChanged: (value) {
-                    setState(() {
-                      _showChart = value;
-                    });
-                  },
-                )
-              ],
-            ),
-            if (!isLandscape) Container(
-                    height: (mediaQuery.size.height -
-                            appBar.preferredSize.height -
-                            mediaQuery.padding.top) *
-                        0.3,
-                    child: Chart(_userTransactions),
-                  ),
-            if (!isLandscape) txListWidget,
-            if (isLandscape) _showChart
-                ? Container(
-                    height: (mediaQuery.size.height -
-                            appBar.preferredSize.height -
-                            mediaQuery.padding.top) *
-                        0.7,
-                    child: Chart(_userTransactions),
+                  Switch(
+                    value: _showChart,
+                    onChanged: (value) {
+                      setState(() {
+                        _showChart = value;
+                      });
+                    },
                   )
-                : txListWidget,
+                ],
+              ),
+            if (!isLandscape)
+              Container(
+                height: (mediaQuery.size.height -
+                        appBar.preferredSize.height -
+                        mediaQuery.padding.top) *
+                    0.3,
+                child: Chart(_userTransactions),
+              ),
+            if (!isLandscape) txListWidget,
+            if (isLandscape)
+              _showChart
+                  ? Container(
+                      height: (mediaQuery.size.height -
+                              appBar.preferredSize.height -
+                              mediaQuery.padding.top) *
+                          0.7,
+                      child: Chart(_userTransactions),
+                    )
+                  : txListWidget,
           ],
         ),
       ),

@@ -7,7 +7,7 @@ class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
   final Function deleteTransaction;
 
-  TransactionList(this.transactions, this.deleteTransaction);
+  const TransactionList(this.transactions, this.deleteTransaction, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class TransactionList extends StatelessWidget {
               itemBuilder: (context, index) {
                 return Card(
                   elevation: 5,
-                  margin: EdgeInsets.symmetric(
+                  margin: const EdgeInsets.symmetric(
                     vertical: 8,
                     horizontal: 5,
                   ),
@@ -46,7 +46,7 @@ class TransactionList extends StatelessWidget {
                     leading: CircleAvatar(
                       radius: 30,
                       child: Padding(
-                        padding: EdgeInsets.all(6),
+                        padding: const EdgeInsets.all(6),
                         child: FittedBox(
                           child: Text('\$${transactions[index].amount}'),
                         ),
@@ -63,12 +63,12 @@ class TransactionList extends StatelessWidget {
                         ? TextButton.icon(
                             onPressed: () =>
                                 deleteTransaction(transactions[index].id),
-                            icon: Icon(Icons.delete),
-                            label: Text('Delete'),
+                            icon: const Icon(Icons.delete),
+                            label: const Text('Delete'),
                             style: ButtonStyle(foregroundColor: MaterialStateProperty.all(Theme.of(context).colorScheme.error)),
                           )
                         : IconButton(
-                            icon: Icon(Icons.delete),
+                            icon: const Icon(Icons.delete),
                             color: Theme.of(context).errorColor,
                             onPressed: () =>
                                 deleteTransaction(transactions[index].id),

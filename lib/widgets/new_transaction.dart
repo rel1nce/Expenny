@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class NewTransaction extends StatefulWidget {
-  final Function addTx;
+  const NewTransaction(this.addTx, {super.key});
 
-  NewTransaction(this.addTx);
+  final Function addTx;
 
   @override
   State<NewTransaction> createState() => _NewTransactionState();
@@ -68,12 +68,12 @@ class _NewTransactionState extends State<NewTransaction> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               TextField(
-                decoration: InputDecoration(labelText: 'Title'),
+                decoration: const InputDecoration(labelText: 'Title'),
                 controller: _titleController,
                 onSubmitted: (_) => _submitData(),
               ),
               TextField(
-                decoration: InputDecoration(labelText: 'Amount'),
+                decoration: const InputDecoration(labelText: 'Amount'),
                 controller: _amountController,
                 keyboardType: TextInputType.number,
                 onSubmitted: (_) => _submitData(),
@@ -87,18 +87,18 @@ class _NewTransactionState extends State<NewTransaction> {
                           ? 'No Date Chosen!'
                           : 'Picked Date: ${DateFormat.yMd().format(_selectedDate!)}'),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 5,
                     ),
                     TextButton(
                       style: TextButton.styleFrom(
                         textStyle: Theme.of(context).textTheme.titleSmall,
                       ),
-                      child: Text(
+                      onPressed: _presentDatePicker,
+                      child: const Text(
                         'Choose Date',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      onPressed: _presentDatePicker,
                     )
                   ],
                 ),
@@ -107,13 +107,12 @@ class _NewTransactionState extends State<NewTransaction> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   ElevatedButton(
-                    child: Text('Add transaction'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Theme.of(context).primaryColor,
-                      foregroundColor:
-                          Theme.of(context).textTheme.labelSmall!.color,
+                      foregroundColor: Theme.of(context).textTheme.labelSmall!.color,
                     ),
                     onPressed: _submitData,
+                    child: const Text('Add transaction'),
                   ),
                 ],
               )
