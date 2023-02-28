@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:expenny/widgets/adaptive_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
 
 class NewTransaction extends StatefulWidget {
@@ -112,7 +113,7 @@ class _NewTransactionState extends State<NewTransaction> {
                     child: const Text('Add transaction'),
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ),

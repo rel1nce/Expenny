@@ -91,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   List<Widget> _buildLandscapeContent(
     MediaQueryData mediaQuery,
-    AppBar appBar,
+    PreferredSizeWidget appBar,
     Container txListWidget,
   ) {
     return [
@@ -123,7 +123,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   List<Widget> _buildPortraitContent(
     MediaQueryData mediaQuery,
-    AppBar appBar,
+    PreferredSizeWidget appBar,
     Container txListWidget,
   ) {
     return [
@@ -199,8 +199,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Platform.isIOS
         ? CupertinoPageScaffold(
-            child: pageBody,
             navigationBar: appBar,
+            child: pageBody,
           )
         : Scaffold(
             appBar: appBar,
