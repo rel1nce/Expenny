@@ -16,6 +16,7 @@ class AdaptiveTextButton extends StatelessWidget {
             onPressed: handler,
             child: Text(
               text,
+              
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           )
